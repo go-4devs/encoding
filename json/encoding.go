@@ -7,8 +7,10 @@ import (
 	"gitoa.ru/go-4devs/encoding"
 )
 
-var _ encoding.Decode = Decode
-var _ encoding.Encode = Encode
+var (
+	_ encoding.Decode = Decode
+	_ encoding.Encode = Encode
+)
 
 func Decode(r io.Reader, v interface{}) error {
 	return json.NewDecoder(r).Decode(v)

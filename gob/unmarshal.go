@@ -7,8 +7,10 @@ import (
 	"gitoa.ru/go-4devs/encoding"
 )
 
-var _ encoding.Unmarshal = Unmarshal
-var _ encoding.Marshal = Marshal
+var (
+	_ encoding.Unmarshal = Unmarshal
+	_ encoding.Marshal   = Marshal
+)
 
 // Unmarshal by gob decoder.
 func Unmarshal(data []byte, v interface{}) error {

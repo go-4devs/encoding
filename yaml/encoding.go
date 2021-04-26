@@ -7,8 +7,10 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
-var _ encoding.Decode = Decode
-var _ encoding.Encode = Encode
+var (
+	_ encoding.Decode = Decode
+	_ encoding.Encode = Encode
+)
 
 // Decode from reader to value.
 func Decode(r io.Reader, v interface{}) error {

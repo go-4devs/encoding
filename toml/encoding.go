@@ -7,12 +7,15 @@ import (
 	"gitoa.ru/go-4devs/encoding"
 )
 
-var _ encoding.Decode = Decode
-var _ encoding.Encode = Encode
+var (
+	_ encoding.Decode = Decode
+	_ encoding.Encode = Encode
+)
 
 // Decode from reader to value.
 func Decode(r io.Reader, v interface{}) error {
 	_, err := toml.DecodeReader(r, v)
+
 	return err
 }
 

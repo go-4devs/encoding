@@ -22,10 +22,19 @@ linters-settings:
 
 linters:
     enable-all: true
+    disable:
+      - scopelint
+      - maligned
+      - interfacer
+      - wrapcheck
 
 issues:
   # Excluding configuration per-path, per-linter, per-text and per-source
   exclude-rules:
     - path: _test\.go
       linters:
+        - gomnd
+    - path: _suite\.go
+      linters:
+        - exhaustivestruct
         - gomnd

@@ -15,5 +15,6 @@ id = 42
 `
 
 func TestDecode(t *testing.T) {
+	t.Parallel()
 	test.RunDecode(t, toml.Decode, data)
 }

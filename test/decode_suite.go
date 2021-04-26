@@ -16,6 +16,7 @@ type Data struct {
 	Time   time.Time
 	Struct SData
 }
+
 type SData struct {
 	ID int64
 }
@@ -36,6 +37,8 @@ type DecodeSuite struct {
 
 // RunSute run test by provider.
 func RunDecode(t *testing.T, decode encoding.Decode, data string) {
+	t.Helper()
+
 	cs := DecodeSuite{
 		decode: decode,
 		data:   bytes.NewBufferString(data),
@@ -43,6 +46,7 @@ func RunDecode(t *testing.T, decode encoding.Decode, data string) {
 
 	suite.Run(t, &cs)
 }
+
 func (ds *DecodeSuite) TestDecode() {
 	var d Data
 

@@ -15,5 +15,6 @@ struct:
 `
 
 func TestDecode(t *testing.T) {
+	t.Parallel()
 	test.RunDecode(t, yaml.Decode, data)
 }
