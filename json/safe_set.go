@@ -10,6 +10,8 @@ import "unicode/utf8"
 //
 // All values are true except for the ASCII control characters (0-31), the
 // double quote ("), and the backslash character ("\").
+//
+//nolint:gochecknoglobals
 var safeSet = [utf8.RuneSelf]bool{
 	' ':      true,
 	'!':      true,

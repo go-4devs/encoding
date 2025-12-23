@@ -13,12 +13,12 @@ var (
 )
 
 // Decode from reader to value.
-func Decode(r io.Reader, v interface{}) error {
+func Decode(r io.Reader, v any) error {
 	return yaml.NewDecoder(r).Decode(v)
 }
 
 // Encode from value to writer.
-func Encode(w io.Writer, v interface{}) error {
+func Encode(w io.Writer, v any) error {
 	enc := yaml.NewEncoder(w)
 	defer enc.Close()
 

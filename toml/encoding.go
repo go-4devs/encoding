@@ -13,13 +13,13 @@ var (
 )
 
 // Decode from reader to value.
-func Decode(r io.Reader, v interface{}) error {
-	_, err := toml.DecodeReader(r, v)
+func Decode(r io.Reader, v any) error {
+	_, err := toml.NewDecoder(r).Decode(v)
 
 	return err
 }
 
 // Encode from value to writer.
-func Encode(w io.Writer, v interface{}) error {
+func Encode(w io.Writer, v any) error {
 	return toml.NewEncoder(w).Encode(v)
 }

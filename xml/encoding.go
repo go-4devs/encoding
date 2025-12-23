@@ -1,4 +1,5 @@
-package json
+//nolint:revive
+package xml
 
 import (
 	"encoding/xml"
@@ -13,11 +14,11 @@ var (
 )
 
 // Decode from xml.
-func Decode(r io.Reader, v interface{}) error {
+func Decode(r io.Reader, v any) error {
 	return xml.NewDecoder(r).Decode(v)
 }
 
 // Encode to xml.
-func Encode(w io.Writer, v interface{}) error {
+func Encode(w io.Writer, v any) error {
 	return xml.NewEncoder(w).Encode(v)
 }

@@ -13,16 +13,18 @@ var (
 )
 
 // Unmarshal by gob decoder.
-func Unmarshal(data []byte, v interface{}) error {
+func Unmarshal(data []byte, v any) error {
 	buf := bytes.NewBuffer(data)
 
 	return gob.NewDecoder(buf).Decode(v)
 }
 
 // Marshal by gob encoder.
-func Marshal(v interface{}) ([]byte, error) {
+func Marshal(v any) ([]byte, error) {
 	var data bytes.Buffer
-	if err := gob.NewEncoder(&data).Encode(v); err != nil {
+
+	err := gob.NewEncoder(&data).Encode(v)
+	if err != nil {
 		return nil, err
 	}
 

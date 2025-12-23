@@ -6,7 +6,6 @@ import (
 	"testing"
 	"time"
 
-	"github.com/stretchr/testify/require"
 	"github.com/stretchr/testify/suite"
 	"gitoa.ru/go-4devs/encoding"
 )
@@ -31,25 +30,29 @@ func expected() Data {
 
 type DecodeSuite struct {
 	suite.Suite
+
 	decode encoding.Decode
 	data   io.Reader
 }
 
-// RunSute run test by provider.
+// RunDecode run test by provider.
 func RunDecode(t *testing.T, decode encoding.Decode, data string) {
 	t.Helper()
 
-	cs := DecodeSuite{
+	caseSuite := DecodeSuite{
 		decode: decode,
 		data:   bytes.NewBufferString(data),
+		Suite: suite.Suite{
+			Assertions: nil,
+		},
 	}
 
-	suite.Run(t, &cs)
+	suite.Run(t, &caseSuite)
 }
 
 func (ds *DecodeSuite) TestDecode() {
 	var d Data
 
-	require.Nil(ds.T(), ds.decode(ds.data, &d))
-	require.Equal(ds.T(), expected(), d)
+	ds.Require().NoError(ds.decode(ds.data, &d))
+	ds.Require().Equal(expected(), d)
 }

@@ -1,4 +1,12 @@
-linters-settings:
+version: "2"
+linters:
+  default: all
+  disable:
+    - wrapcheck
+    - wsl
+    - depguard
+    - revive
+  settings:
     dupl:
       threshold: 100
     funlen:
@@ -9,32 +17,39 @@ linters-settings:
       min-occurrences: 2
     gocyclo:
       min-complexity: 15
-    golint:
-      min-confidence: 0
-    govet:
-      check-shadowing: true
     lll:
       line-length: 140
-    maligned:
-      suggest-new: true
     misspell:
-      locale: US  
-
-linters:
-    enable-all: true
-    disable:
-      - scopelint
-      - maligned
-      - interfacer
-      - wrapcheck
-
-issues:
-  # Excluding configuration per-path, per-linter, per-text and per-source
-  exclude-rules:
-    - path: _test\.go
-      linters:
-        - gomnd
-    - path: _suite\.go
-      linters:
-        - exhaustivestruct
-        - gomnd
+      locale: US
+  exclusions:
+    generated: lax
+    presets:
+      - comments
+      - common-false-positives
+      - legacy
+      - std-error-handling
+    rules:
+      - linters:
+          - mnd
+        path: _test\.go
+      - linters:
+          - exhaustivestruct
+          - mnd
+        path: _suite\.go
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
+formatters:
+  enable:
+    - gci
+    - gofmt
+    - gofumpt
+    - goimports
+    - golines
+  exclusions:
+    generated: lax
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
