@@ -3,7 +3,7 @@ package xml_test
 import (
 	"testing"
 
-	"github.com/go-4devs/encoding/internal/test"
+	"github.com/go-4devs/encoding/test"
 	"github.com/go-4devs/encoding/xml"
 )
 

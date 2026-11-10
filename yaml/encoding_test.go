@@ -4,8 +4,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/go-4devs/encoding/internal/test"
-	"github.com/go-4devs/encoding/internal/test/require"
+	"github.com/go-4devs/encoding/internal/require"
+	"github.com/go-4devs/encoding/test"
 	"github.com/go-4devs/encoding/yaml"
 )
 

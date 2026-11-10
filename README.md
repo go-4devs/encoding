@@ -6,6 +6,8 @@
 
 Package `encoding` defines `Encode` and `Decode`. The packages `json`, `yaml`, `toml`, `xml`, and `gob` implement those functions, so the caller can change the format without changing the call. `gob` also has `Marshal` and `Unmarshal` for a byte slice.
 
+Package `test` checks another implementation against one shared value. Call `test.RunDecode`, `test.RunEncode`, or `test.RunMarshal`.
+
 ```go
 package main
 
