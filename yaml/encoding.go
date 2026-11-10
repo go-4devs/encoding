@@ -1,6 +1,7 @@
 package yaml
 
 import (
+	"errors"
 	"io"
 
 	"github.com/go-4devs/encoding"
@@ -8,13 +9,33 @@ import (
 )
 
 var (
+	errExtraDocument = errors.New("yaml: extra document")
+
 	_ encoding.Decode = Decode
 	_ encoding.Encode = Encode
 )
 
 // Decode from reader to value.
 func Decode(r io.Reader, v any) error {
-	return yaml.NewDecoder(r).Decode(v)
+	dec := yaml.NewDecoder(r)
+
+	err := dec.Decode(v)
+	if err != nil {
+		return err
+	}
+
+	var extra any
+
+	err = dec.Decode(&extra)
+	if err != nil {
+		if errors.Is(err, io.EOF) {
+			return nil
+		}
+
+		return err
+	}
+
+	return errExtraDocument
 }
 
 // Encode from value to writer.
