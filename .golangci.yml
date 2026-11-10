@@ -6,6 +6,8 @@ linters:
     - wsl
     - depguard
     - revive
+    - exhaustruct
+    - gomodguard
   settings:
     dupl:
       threshold: 100
@@ -33,7 +35,6 @@ linters:
           - mnd
         path: _test\.go
       - linters:
-          - exhaustivestruct
           - mnd
         path: _suite\.go
     paths:

@@ -1,10 +1,12 @@
+// Package json reads and writes one JSON value with encoding/json/v2.
 package json
 
 import (
-	"encoding/json"
+	"encoding/json/jsontext"
+	"encoding/json/v2"
 	"io"
 
-	"gitoa.ru/go-4devs/encoding"
+	"github.com/go-4devs/encoding"
 )
 
 var (
@@ -12,10 +14,25 @@ var (
 	_ encoding.Encode = Encode
 )
 
+// Decode reads one JSON value from r into v.
+// A later value in r is left for the next Decode call.
 func Decode(r io.Reader, v any) error {
-	return json.NewDecoder(r).Decode(v)
+	// shortcut: one-byte reads, upgrade when one JSON value is large enough that the extra reads matter
+	return json.UnmarshalDecode(jsontext.NewDecoder(oneByteReader{r}), v)
 }
 
+// oneByteReader stops the decoder from pulling the next value into its own buffer.
+type oneByteReader struct{ r io.Reader }
+
+func (b oneByteReader) Read(p []byte) (int, error) {
+	if len(p) == 0 {
+		return 0, nil
+	}
+
+	return b.r.Read(p[:1])
+}
+
+// Encode writes v to w as JSON. It does not add a trailing newline.
 func Encode(w io.Writer, v any) error {
-	return json.NewEncoder(w).Encode(v)
+	return json.MarshalWrite(w, v)
 }

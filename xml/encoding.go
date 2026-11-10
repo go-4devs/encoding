@@ -1,3 +1,5 @@
+// Package xml reads and writes one XML value.
+//
 //nolint:revive
 package xml
 
@@ -5,7 +7,7 @@ import (
 	"encoding/xml"
 	"io"
 
-	"gitoa.ru/go-4devs/encoding"
+	"github.com/go-4devs/encoding"
 )
 
 var (
@@ -13,12 +15,12 @@ var (
 	_ encoding.Encode = Encode
 )
 
-// Decode from xml.
+// Decode reads one XML value from r into v.
 func Decode(r io.Reader, v any) error {
 	return xml.NewDecoder(r).Decode(v)
 }
 
-// Encode to xml.
+// Encode writes v to w as XML.
 func Encode(w io.Writer, v any) error {
 	return xml.NewEncoder(w).Encode(v)
 }

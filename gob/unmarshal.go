@@ -2,9 +2,8 @@ package gob
 
 import (
 	"bytes"
-	"encoding/gob"
 
-	"gitoa.ru/go-4devs/encoding"
+	"github.com/go-4devs/encoding"
 )
 
 var (
@@ -12,18 +11,16 @@ var (
 	_ encoding.Marshal   = Marshal
 )
 
-// Unmarshal by gob decoder.
+// Unmarshal reads one gob value from data into v.
 func Unmarshal(data []byte, v any) error {
-	buf := bytes.NewBuffer(data)
-
-	return gob.NewDecoder(buf).Decode(v)
+	return Decode(bytes.NewReader(data), v)
 }
 
-// Marshal by gob encoder.
+// Marshal writes v as gob bytes.
 func Marshal(v any) ([]byte, error) {
 	var data bytes.Buffer
 
-	err := gob.NewEncoder(&data).Encode(v)
+	err := Encode(&data, v)
 	if err != nil {
 		return nil, err
 	}

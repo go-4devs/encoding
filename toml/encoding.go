@@ -1,10 +1,11 @@
+// Package toml reads and writes one TOML document.
 package toml
 
 import (
 	"io"
 
 	"github.com/BurntSushi/toml"
-	"gitoa.ru/go-4devs/encoding"
+	"github.com/go-4devs/encoding"
 )
 
 var (
@@ -12,14 +13,14 @@ var (
 	_ encoding.Encode = Encode
 )
 
-// Decode from reader to value.
+// Decode reads one TOML document from r into v.
 func Decode(r io.Reader, v any) error {
 	_, err := toml.NewDecoder(r).Decode(v)
 
 	return err
 }
 
-// Encode from value to writer.
+// Encode writes v to w as TOML.
 func Encode(w io.Writer, v any) error {
 	return toml.NewEncoder(w).Encode(v)
 }
