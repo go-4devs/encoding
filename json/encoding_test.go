@@ -1,6 +1,7 @@
 package json_test
 
 import (
+	"strings"
 	"testing"
 
 	"github.com/go-4devs/encoding/json"
@@ -13,6 +14,19 @@ const data = `{"String":"string data","Time":"2020-05-24T09:15:00Z","Struct":{"I
 func TestDecode(t *testing.T) {
 	t.Parallel()
 	test.RunDecode(t, json.Decode, data)
+}
+
+func TestDecodeTwoValues(t *testing.T) {
+	t.Parallel()
+
+	r := strings.NewReader(`{"A":1}{"A":2}`)
+
+	var first, second struct{ A int }
+
+	require.NoError(t, json.Decode(r, &first))
+	require.NoError(t, json.Decode(r, &second))
+	require.Equal(t, 1, first.A)
+	require.Equal(t, 2, second.A)
 }
 
 func TestEncode(t *testing.T) {
