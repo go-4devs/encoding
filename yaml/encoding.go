@@ -1,3 +1,4 @@
+// Package yaml reads and writes one YAML document.
 package yaml
 
 import (
@@ -15,7 +16,9 @@ var (
 	_ encoding.Encode = Encode
 )
 
-// Decode from reader to value.
+// Decode reads one YAML document from r into v.
+// It returns an error if another document follows. The decoder has already
+// read the rest of r, so that document cannot be decoded from r later.
 func Decode(r io.Reader, v any) error {
 	dec := yaml.NewDecoder(r)
 
@@ -38,7 +41,7 @@ func Decode(r io.Reader, v any) error {
 	return errExtraDocument
 }
 
-// Encode from value to writer.
+// Encode writes v to w as one YAML document.
 func Encode(w io.Writer, v any) error {
 	enc := yaml.NewEncoder(w)
 	defer enc.Close()

@@ -1,3 +1,4 @@
+// Package test holds the shared value and checks for the format tests.
 package test
 
 import (
@@ -9,12 +10,14 @@ import (
 	"github.com/go-4devs/encoding/internal/test/require"
 )
 
+// Data is the value the shared checks encode and decode.
 type Data struct {
 	String string
 	Time   time.Time
 	Struct SData
 }
 
+// SData is the nested value inside Data.
 type SData struct {
 	ID int64
 }
@@ -27,7 +30,7 @@ func expected() Data {
 	}
 }
 
-// RunDecode run test by provider.
+// RunDecode checks that decode reads data into Data.
 func RunDecode(t *testing.T, decode encoding.Decode, data string) {
 	t.Helper()
 

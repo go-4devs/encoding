@@ -1,3 +1,4 @@
+// Package require stops a test when a check fails.
 package require
 
 import (

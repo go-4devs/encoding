@@ -11,12 +11,12 @@ var (
 	_ encoding.Marshal   = Marshal
 )
 
-// Unmarshal by gob decoder.
+// Unmarshal reads one gob value from data into v.
 func Unmarshal(data []byte, v any) error {
 	return Decode(bytes.NewReader(data), v)
 }
 
-// Marshal by gob encoder.
+// Marshal writes v as gob bytes.
 func Marshal(v any) ([]byte, error) {
 	var data bytes.Buffer
 

@@ -1,3 +1,4 @@
+// Package json reads and writes one JSON value with encoding/json/v2.
 package json
 
 import (
@@ -13,6 +14,8 @@ var (
 	_ encoding.Encode = Encode
 )
 
+// Decode reads one JSON value from r into v.
+// A later value in r is left for the next Decode call.
 func Decode(r io.Reader, v any) error {
 	// shortcut: one-byte reads, upgrade when one JSON value is large enough that the extra reads matter
 	return json.UnmarshalDecode(jsontext.NewDecoder(oneByteReader{r}), v)
@@ -29,6 +32,7 @@ func (b oneByteReader) Read(p []byte) (int, error) {
 	return b.r.Read(p[:1])
 }
 
+// Encode writes v to w as JSON. It does not add a trailing newline.
 func Encode(w io.Writer, v any) error {
 	return json.MarshalWrite(w, v)
 }
