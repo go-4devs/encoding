@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/go-4devs/encoding/gob"
-	"github.com/go-4devs/encoding/test"
+	"github.com/go-4devs/encoding/internal/test"
 )
 
 func TestEncode(t *testing.T) {

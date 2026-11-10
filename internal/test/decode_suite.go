@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/go-4devs/encoding"
-	"github.com/go-4devs/encoding/test/require"
+	"github.com/go-4devs/encoding/internal/test/require"
 )
 
 type Data struct {

@@ -4,9 +4,9 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/go-4devs/encoding/internal/test"
+	"github.com/go-4devs/encoding/internal/test/require"
 	"github.com/go-4devs/encoding/json"
-	"github.com/go-4devs/encoding/test"
-	"github.com/go-4devs/encoding/test/require"
 )
 
 const data = `{"String":"string data","Time":"2020-05-24T09:15:00Z","Struct":{"ID":42}}`
