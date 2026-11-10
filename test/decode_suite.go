@@ -2,13 +2,11 @@ package test
 
 import (
 	"bytes"
-	"io"
 	"testing"
 	"time"
 
 	"github.com/go-4devs/encoding"
 	"github.com/stretchr/testify/require"
-	"github.com/stretchr/testify/suite"
 )
 
 type Data struct {
@@ -29,24 +27,14 @@ func expected() Data {
 	}
 }
 
-type DecodeSuite struct {
-	suite.Suite
-
-	decode encoding.Decode
-	data   io.Reader
-}
-
 // RunDecode run test by provider.
 func RunDecode(t *testing.T, decode encoding.Decode, data string) {
 	t.Helper()
 
-	caseSuite := DecodeSuite{
-		decode:     decode,
-		data:       bytes.NewBufferString(data),
-		Assertions: nil,
-	}
+	var got Data
 
-	suite.Run(t, &caseSuite)
+	require.NoError(t, decode(bytes.NewBufferString(data), &got))
+	require.Equal(t, expected(), got)
 }
 
 // RunEncode checks that encode output decodes back to the same value.
@@ -74,11 +62,4 @@ func RunMarshal(t *testing.T, marshal encoding.Marshal, unmarshal encoding.Unmar
 
 	require.NoError(t, unmarshal(data, &got))
 	require.Equal(t, expected(), got)
-}
-
-func (ds *DecodeSuite) TestDecode() {
-	var d Data
-
-	ds.Require().NoError(ds.decode(ds.data, &d))
-	ds.Require().Equal(expected(), d)
 }
