@@ -4,7 +4,7 @@ import (
 	"encoding/gob"
 	"io"
 
-	"gitoa.ru/go-4devs/encoding"
+	"github.com/go-4devs/encoding"
 )
 
 var (

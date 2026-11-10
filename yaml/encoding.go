@@ -3,8 +3,8 @@ package yaml
 import (
 	"io"
 
-	"gitoa.ru/go-4devs/encoding"
-	"gopkg.in/yaml.v3"
+	"github.com/go-4devs/encoding"
+	"go.yaml.in/yaml/v3"
 )
 
 var (

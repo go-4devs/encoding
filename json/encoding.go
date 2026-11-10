@@ -1,10 +1,10 @@
 package json
 
 import (
-	"encoding/json"
+	"encoding/json/v2"
 	"io"
 
-	"gitoa.ru/go-4devs/encoding"
+	"github.com/go-4devs/encoding"
 )
 
 var (
@@ -13,9 +13,9 @@ var (
 )
 
 func Decode(r io.Reader, v any) error {
-	return json.NewDecoder(r).Decode(v)
+	return json.UnmarshalRead(r, v)
 }
 
 func Encode(w io.Writer, v any) error {
-	return json.NewEncoder(w).Encode(v)
+	return json.MarshalWrite(w, v)
 }

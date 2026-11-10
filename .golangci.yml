@@ -6,6 +6,8 @@ linters:
     - wsl
     - depguard
     - revive
+    - exhaustruct
+    - gomodguard
   settings:
     dupl:
       threshold: 100

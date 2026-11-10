@@ -6,8 +6,9 @@ import (
 	"testing"
 	"time"
 
+	"github.com/go-4devs/encoding"
+	"github.com/stretchr/testify/require"
 	"github.com/stretchr/testify/suite"
-	"gitoa.ru/go-4devs/encoding"
 )
 
 type Data struct {
@@ -40,14 +41,39 @@ func RunDecode(t *testing.T, decode encoding.Decode, data string) {
 	t.Helper()
 
 	caseSuite := DecodeSuite{
-		decode: decode,
-		data:   bytes.NewBufferString(data),
-		Suite: suite.Suite{
-			Assertions: nil,
-		},
+		decode:     decode,
+		data:       bytes.NewBufferString(data),
+		Assertions: nil,
 	}
 
 	suite.Run(t, &caseSuite)
+}
+
+// RunEncode checks that encode output decodes back to the same value.
+func RunEncode(t *testing.T, encode encoding.Encode, decode encoding.Decode) {
+	t.Helper()
+
+	var buf bytes.Buffer
+
+	require.NoError(t, encode(&buf, expected()))
+
+	var got Data
+
+	require.NoError(t, decode(&buf, &got))
+	require.Equal(t, expected(), got)
+}
+
+// RunMarshal checks that marshal output unmarshals back to the same value.
+func RunMarshal(t *testing.T, marshal encoding.Marshal, unmarshal encoding.Unmarshal) {
+	t.Helper()
+
+	data, err := marshal(expected())
+	require.NoError(t, err)
+
+	var got Data
+
+	require.NoError(t, unmarshal(data, &got))
+	require.Equal(t, expected(), got)
 }
 
 func (ds *DecodeSuite) TestDecode() {

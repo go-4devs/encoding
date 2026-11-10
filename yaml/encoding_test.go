@@ -3,8 +3,8 @@ package yaml_test
 import (
 	"testing"
 
-	"gitoa.ru/go-4devs/encoding/test"
-	"gitoa.ru/go-4devs/encoding/yaml"
+	"github.com/go-4devs/encoding/test"
+	"github.com/go-4devs/encoding/yaml"
 )
 
 const data = `
@@ -17,4 +17,9 @@ struct:
 func TestDecode(t *testing.T) {
 	t.Parallel()
 	test.RunDecode(t, yaml.Decode, data)
+}
+
+func TestEncode(t *testing.T) {
+	t.Parallel()
+	test.RunEncode(t, yaml.Encode, yaml.Decode)
 }
