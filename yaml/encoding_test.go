@@ -5,8 +5,8 @@ import (
 	"testing"
 
 	"github.com/go-4devs/encoding/test"
+	"github.com/go-4devs/encoding/test/require"
 	"github.com/go-4devs/encoding/yaml"
-	"github.com/stretchr/testify/require"
 )
 
 const data = `

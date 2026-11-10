@@ -6,7 +6,7 @@ import (
 
 	"github.com/go-4devs/encoding/json"
 	"github.com/go-4devs/encoding/test"
-	"github.com/stretchr/testify/require"
+	"github.com/go-4devs/encoding/test/require"
 )
 
 const data = `{"String":"string data","Time":"2020-05-24T09:15:00Z","Struct":{"ID":42}}`
