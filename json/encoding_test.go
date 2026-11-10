@@ -30,9 +30,11 @@ func TestCanSafeSet(t *testing.T) {
 		{r: 'a', safe: true},
 		{r: ' ', safe: true},
 		{r: '\u007f', safe: true},
+		{r: 'é', safe: true},
 		{r: '"', safe: false},
 		{r: '\\', safe: false},
 		{r: 0, safe: false},
+		{r: -1, safe: false},
 	}
 
 	for _, tt := range tests {
